@@ -28,16 +28,25 @@
         </header>
 
         <section class="Welcome">
-            <div id="welcomeMsg" class=welcome>Welcome to Trivia Game..The perfect scorer wins $100</div>
+            <div id="welcomeMsg" class=welcome>
+                <h2>Welcome to Trivia Game..The perfect scorer wins $100 <br>
+                    Please click PLAY to start the game
+                </h2>
+            </div>
+            <input type="submit" name="play-btn" id="play-btn" value="PLAY" />
         </section>
 
         <section class="trivia Questions">
-            <blockquote>Trivia Question</blockquote>
-            <p>Category - Country Knowledge</p>
-            <!-- <div id="question" class=question>Trivia Questions</div> -->
+            <div>
+                <input type="submit" name="next-btn" id="next-btn" value="Next" />
+                <input type="submit" name="reset-btn" id="reset-btn" value="Reset/Play New Game" />
+            </div>
+            <blockquote>Score</blockquote>
+            <p>$0</p>
         </section>
 
-        <main class="grid-item content">
+
+        <main class="grid-item quesContent">
             <ul class="prevQuestions">
                 <li class="questions">
                     <blockquote>Question1--.</blockquote>
@@ -50,12 +59,12 @@
             </ul>
         </main>
 
-        <section class="buttons">
+
+        <!-- <section class="buttons">
             <div id="Buttons" class=buttons>
-                <input type="submit" name="next-btn" id="next-btn" value="Next" />
-                <input type="submit" name="reser-btn" id="reset-btn" value="Reset/Play New Game" />
+
             </div>
-        </section>
+        </section> -->
 
         <footer class="grid-item">
             <p>&copy;2020 Send Feedback to the creator @sachin06jd@gmail.com</p>

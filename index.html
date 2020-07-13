@@ -34,7 +34,7 @@
             <div class="btns">
                 <!-- <br><img src="css/france.png" height="60" width="60"> </a> <br> -->
 
-                <input type="text" name="name-text" id="name-text" value="" />
+                <input type="text" name="name-text" id="name-text" value="" placeholder="Enter your name" />
                 <input type="submit" name="play-btn" id="play-btn" value="PLAY" />
             </div>
         </div>
@@ -51,15 +51,17 @@
                 <h3 id="user1-name"></h3>
                 <p id="p_user1"></p>
                 <!-- <input type="submit" name="next-btn" id="next-btn" value="Next" /> -->
-                <input type="submit" name="reset-btn" id="reset-btn" value="Reset/Play New Game" />
+                <!-- <input type="submit" name="reset-btn" id="reset-btn" value="Reset/Play New Game" /> -->
+
+
             </div>
         </section>
 
-        <section>
-            <div id="questions" class="questions">
-                <p>Questions & Correct Answers</p>
-            </div>
-        </section>
+        <input type="submit" name="reset-btn" id="reset-btn" value="Reset/Play New Game" />
+        <h4>
+            <span id="timerLabel">Remaining Time:- </span><br />
+            <span id='timer'></span>
+        </h4>
 
         <section class=" trivia User2">
             <div>
@@ -69,6 +71,12 @@
                 <p id="p_user2"></p>
                 <!-- <input type="submit" name="next-btn" id="next-btn" value="Next" /> -->
                 <!-- <input type="submit" name="reset-btn2" id="reset-btn2" value="Reset/Play New Game" /> -->
+            </div>
+        </section>
+
+        <section>
+            <div id="questions" class="questions">
+                <p>Shows Questions & Correct Answers (after you attempt quiz)</p>
             </div>
         </section>
 

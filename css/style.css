@@ -15,7 +15,7 @@ body {
     font-family: 'sans-serif', Helvetica, Verdana, ;
   }  */
   
-  header {
+  /* header {
     grid-column: span 3;
     display: flex;
     justify-content: space-between;
@@ -25,7 +25,7 @@ body {
   header h1 {
     margin: 12px 0;
     padding: 0;
-  }
+  } */
   
   nav ul {
     display: flex;
@@ -124,12 +124,9 @@ body {
   
   .questions p {
     font: 1.1em 'verdana', cursive;
-    height: 110px;
+    height: 190px;
     /* width: 400px; */
   }
-  /* .Questions p {
-    font: 3.7em 'Pinyon Script', cursive;
-  } */
 
  #name-text{
  height: 30px;
@@ -213,56 +210,15 @@ body {
     opacity: 1.0;
   }
 
+#timer {
+color: red;
+font-size: larger;
+/* background-color: burlywood; */
+background-color: rgb(108, 192, 194);
+height: 20;
+width:25px;
+  }
 
 
 
-
-    /* 
-      
-      .form input, .form textarea {
-        width: 90%;
-        margin: 5px 0;
-        padding: 5px;
-        font-size: 110%;
-      }
-      
-      .form textarea {
-        height: 80px;
-      }
-      
-      .form label {
-        font-weight: bold;
-      }
-      
-      .quote {
-        list-style-type: none;
-        margin: 15px;
-        padding: 4px 25px 4px 0;
-        background: #eee;
-        border: 1px solid #ccc;
-      }
-      
-      .quote blockquote {
-        font: 1.7em 'Pinyon Script', cursive;
-      }
-      
-      .quote newblockquote {
-        font: 1.7em 'Pinyon Script', cursive;
-      }
-      
-      .quote p {
-        text-align: right;
-        font-style: italic;
-      }
-      
-      footer {
-        grid-column: span 2;
-        padding: 0 10px;
-        background: #333;
-        color: #fff;
-      }
-      
-      .content {
-        padding: 10px;
-      }
-         */
+    

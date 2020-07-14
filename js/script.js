@@ -12,7 +12,7 @@ const preAns = document.querySelector(".questions");
 const p_user1 = document.querySelector("#p_user1");
 const p_user2 = document.querySelector("#p_user2");
 
-//imageDiv - variable to create new div for image panel that will have multiple images
+//"imageDiv - variable to create new div for image panel that will have multiple images"
 //questionP - to add question to Q&A pnael
 //answerP - to add answer to Q&A pnael
 let imageDiv = document.createElement("div");
@@ -42,6 +42,7 @@ let answersArray = ["(A1) - India, ", "(A2) - Iceland, ", "(A3) - Japan, ", "(A4
 
 const gameEndMsg = "Game Ends! See you in another game!!"
 resetBtn.disabled = true;
+let counter = 60;
 
 let play = () => {
     if (playBtn.value === "PLAY") {
@@ -57,59 +58,102 @@ let play = () => {
             resetBtn.disabled = false;
 
             showImagePanel();
-            setTimeInterval();
+
+            //Timer starts when PLAY button is clicked
+            let interval = setInterval(() => {
+
+                if (playBtn.value === "Next" || playBtn.value === "This is Last Question") {
+                    triviaTimer();
+                }
+
+            }, 1000); //1000 ms = 1 sec interval
+
+
+            // let counter = 60; //60secs = 1min
+            let triviaTimer = () => {
+                document.querySelector("#timer").innerHTML = `Remaining Time = ${counter--} seconds`;
+                //Timer(remaining seconds)
+                if (counter === 0) {
+                    console.log("TRIVIA TIME UP");
+                    alert("TRIVIA TIME UP");
+                    document.querySelector("#timer").remove();
+                    playBtn.value = "Show Results" //when times up, reach end of game, show results button
+                    return false;
+                }
+            };
         }
     }
     //Q2-What country is called `Land of Fire and Ice`? "
     else if ((playBtn.value === "Next") && (changeMessage.innerHTML === questionsArray[0])) {
         changeMessage.innerHTML = questionsArray[1];
         showImagePanel();
+        user1display.innerHTML = "";
+        console.log("Q1 index value is " + index);
+
     }
     //Q3-What country is made up of 3,000 islands? "
     else if ((playBtn.value === "Next") && (changeMessage.innerHTML === questionsArray[1])) {
         changeMessage.innerHTML = questionsArray[2];
         showImagePanel();
+        user1display.innerHTML = "";
     }
     //Q4-What country celebrates its New Year with people dancing underneath a dragon costume?
     else if ((playBtn.value === "Next") && (changeMessage.innerHTML === questionsArray[2])) {
         changeMessage.innerHTML = questionsArray[3];
         showImagePanel();
+        user1display.innerHTML = "";
     }
     //Q5-What country is less than a hundred miles away from the U.S. state - FLORIDA?
     else if ((playBtn.value === "Next") && (changeMessage.innerHTML === questionsArray[3])) {
         changeMessage.innerHTML = questionsArray[4];
         showImagePanel();
+        user1display.innerHTML = "";
     }
     //Q6- Luxury vehicles such as Ferrari, Maserati, and Lamborghini are manufactured in what country? (italy)
     else if ((playBtn.value === "Next") && (changeMessage.innerHTML === questionsArray[4])) {
         changeMessage.innerHTML = questionsArray[5];
         showImagePanel();
+        user1display.innerHTML = "";
     }
     //Q7- Where is `Mount Everest`? (nepal)
     else if ((playBtn.value === "Next") && (changeMessage.innerHTML === questionsArray[5])) {
         changeMessage.innerHTML = questionsArray[6];
         showImagePanel();
+        user1display.innerHTML = "";
     }
     //Q8- Brendan Eich created the JavaScript programming language, Where is he from? (usa)
     else if ((playBtn.value === "Next") && (changeMessage.innerHTML === questionsArray[6])) {
         changeMessage.innerHTML = questionsArray[7];
         showImagePanel();
+        user1display.innerHTML = "";
     }
     //Q9-Niagara Falls is located in the United States and what other country?
     else if ((playBtn.value === "Next") && (changeMessage.innerHTML === questionsArray[7])) {
         changeMessage.innerHTML = questionsArray[8];
         showImagePanel();
+        user1display.innerHTML = "";
     }
     //10-True champagne can only come from grapes grown in the Champagne region of what country?
     else if ((playBtn.value === "Next") && (changeMessage.innerHTML === questionsArray[8])) {
         changeMessage.innerHTML = questionsArray[9];
         showImagePanel();
-        playBtn.value = "Show Results";
+        user1display.innerHTML = "";
+        playBtn.value = "This is Last Question";
     }
     else if ((playBtn.value === "Show Results")) {
+        //if user clicks show button before timer expires
+        if (counter > 0) { document.querySelector("#timer").remove(); }
         changeMessage.innerHTML = gameEndMsg;
         winLogic();
         playBtn.disabled = true;
+
+        // let getImgArray = document.querySelectorAll(".image");
+        // console.log("getImgArray" + getImgArray)
+        // getImgArray[0] = "css/india.png";
+        // getImgArray[1] = "css/india.png";
+        // getImgArray[2] = "css/india.png";
+        // // getImgArray.remove;
+
     } else {
         return false;
     }
@@ -117,10 +161,6 @@ let play = () => {
 }
 //show options for answer 
 let showImagePanel = () => {
-    //     insertDivsAndImages();
-    // }
-
-    // let insertDivsAndImages = () => {
 
     let imgArray = [];
     imgArray[0] = document.createElement("img");
@@ -138,7 +178,7 @@ let showImagePanel = () => {
 
     //If Q1 then call showAnswerOne()
     if (changeMessage.innerHTML === questionsArray[0]) {
-        //addAnswer1_ImgSources();                  //Add Q1 images to imgArray indexs
+        //addAnswer1_ImgSources();                  
         imgArray[0].src = "css/india.png";
         imgArray[1].src = "css/bolivia.png";
         imgArray[2].src = "css/ghana.png";
@@ -225,6 +265,7 @@ let showImagePanel = () => {
         getImgArray[0].src = "css/france.png";
         getImgArray[1].src = "css/italy.png";
         getImgArray[2].src = "css/germany.png";
+
         imageDiv.addEventListener("click", showAnswerTen);
     }
     else {
@@ -253,10 +294,11 @@ let showAnswerOne = () => {
 
     console.log("Index is " + index);
     if (index === 0) { //india flag clicked
-        alert(`You got it - ${answersArray[index]} is correct answer`);
+        //user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[index])} is correct answer`;
+        user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[index])} is correct answer.
+        click Next to continue`;
         user1Score += 1; user1winMoney += 10;
         p_user1.innerHTML = `Score - ${user1Score}/10`;
-
         imageDiv.removeEventListener("click", showAnswerOne);
 
         //add Q&A to Q&A panel at the bottom
@@ -264,13 +306,11 @@ let showAnswerOne = () => {
         preQue.appendChild(questionP);
         answerP.innerHTML += answersArray[0];
         preAns.appendChild(answerP);
-
-        console.log(" user1 score is  " + user1Score); console.log(" user1 score is  " + user1winMoney);
+        console.log(" Q1- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     else if (index === 1 || index === 2) {
-        alert("Wrong Answer");
+        user1display.innerHTML = '<span style="color:red"> Wrong Answer </span>' + `click Next to continue`;
         user1Score += 0; user1winMoney += 0;
-
         imageDiv.removeEventListener("click", showAnswerOne);
 
         //add Q&A to Q&A panel at the bottom
@@ -278,7 +318,7 @@ let showAnswerOne = () => {
         preQue.appendChild(questionP);
         answerP.innerHTML += answersArray[0];
         preAns.appendChild(answerP);
-        console.log(" user1 score is  " + user1Score); console.log(" user1 score is  " + user1winMoney);
+        console.log(" Q1- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
 
     } else {
         return false;
@@ -292,7 +332,9 @@ let showAnswerTwo = () => {
     console.log("index is " + index);
 
     if (index === 1) {
-        alert(`You got it - ${answersArray[index]} is correct answer`);
+        //user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[index])} is correct answer`;
+        user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[index])} is correct answer.
+        click Next to continue`;
         user1Score += 1; user1winMoney += 10;
         p_user1.innerHTML = `Score - ${user1Score} /10`;
         imageDiv.removeEventListener("click", showAnswerTwo);
@@ -300,12 +342,12 @@ let showAnswerTwo = () => {
         //add Q&A to Q&A panel at the bottom
         questionP.innerHTML += questionsArray[index];
         preQue.appendChild(questionP);
-
         answerP.innerHTML += answersArray[index];
         preAns.appendChild(answerP);
+        console.log(" Q2 - user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     else if (index === 0 || index === 2) {
-        alert("Wrong Answer");
+        user1display.innerHTML = '<span style="color:red"> Wrong Answer </span>' + `click Next to continue`;
         user1Score += 0; user1winMoney += 0;
 
         //add Q&A to Q&A panel at the bottom
@@ -314,6 +356,8 @@ let showAnswerTwo = () => {
         preQue.appendChild(questionP);
         answerP.innerHTML += answersArray[1];
         preAns.appendChild(answerP);
+        console.log(" Q2 - user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
+
     } else {
         return false;
     }
@@ -327,7 +371,9 @@ let showAnswerThree = () => {
     console.log("Ids is " + index);
 
     if (index === 2) {
-        alert(`You got it - ${answersArray[index]} is correct answer`);
+        //user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[index])} is correct answer`;
+        user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[index])} is correct answer.
+        click Next to continue`;
         user1Score += 1; user1winMoney += 10;
         p_user1.innerHTML = `Score - ${user1Score}/10`;
         imageDiv.removeEventListener("click", showAnswerThree);
@@ -338,10 +384,10 @@ let showAnswerThree = () => {
         answerP.innerHTML += answersArray[index];
         preAns.appendChild(answerP);
 
-        // console.log(" user1 score is  " + user1Score); console.log(" user1 winning amount is  " + user1winMoney);
+        console.log("Q3- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     else if (index === 0 || index === 1) {
-        alert("Wrong Answer");
+        user1display.innerHTML = '<span style="color:red"> Wrong Answer </span>' + `click Next to continue`;
         user1Score += 0; user1winMoney += 0;
 
         //adding question & correct questions & answer to Q&A panel at the bottom, although worng answer
@@ -350,7 +396,7 @@ let showAnswerThree = () => {
         preQue.appendChild(questionP);
         answerP.innerHTML += answersArray[2];
         preAns.appendChild(answerP);
-        // console.log(" user1 score is  " + user1Score); console.log(" user1 score is  " + user1winMoney);
+        console.log("Q3- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     } else {
         return false;
     }
@@ -364,7 +410,10 @@ let showAnswerFour = () => {
     console.log("Ids is " + index);
 
     if (index === 1) {
-        alert(`You got it - ${answersArray[3]} is correct answer`);
+        //user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[3])} is correct answer`;
+        user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[3])} is correct answer.
+        click Next to continue`;
+
         user1Score += 1; user1winMoney += 10;
         p_user1.innerHTML = `Score - ${user1Score}/10`;
         imageDiv.removeEventListener("click", showAnswerFour);
@@ -374,10 +423,10 @@ let showAnswerFour = () => {
         preQue.appendChild(questionP);
         answerP.innerHTML += answersArray[3];
         preAns.appendChild(answerP);
-        // console.log(" user1 score is  " + user1Score); console.log(" user1 winning amount is  " + user1winMoney);
+        console.log("Q4- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     else if (index === 0 || index === 2) {
-        alert("Wrong Answer");
+        user1display.innerHTML = '<span style="color:red"> Wrong Answer </span>' + `click Next to continue`;
         user1Score += 0; user1winMoney += 0;
 
         //add Q&A to Q&A panel at the bottom
@@ -386,7 +435,7 @@ let showAnswerFour = () => {
         preQue.appendChild(questionP);
         answerP.innerHTML += answersArray[3];
         preAns.appendChild(answerP);
-        // console.log(" user1 score is  " + user1Score); console.log(" user1 score is  " + user1winMoney);
+        console.log("Q4 user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     } else {
         return false;
     }
@@ -399,7 +448,10 @@ let showAnswerFive = () => {
     // console.log("Index is " + index);
 
     if (index === 2) {
-        alert(`You got it - ${answersArray[4]} is correct answer`);
+        //user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[4])} is correct answer`;
+        user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[4])} is correct answer.
+        click Next to continue`;
+
         user1Score += 1; user1winMoney += 10;
         p_user1.innerHTML = `Score - ${user1Score}/10`;
         imageDiv.removeEventListener("click", showAnswerFive);
@@ -410,10 +462,10 @@ let showAnswerFive = () => {
         answerP.innerHTML += answersArray[4];
         preAns.appendChild(answerP);
 
-        // console.log(" user1 score is  " + user1Score); console.log(" user1 winning amount is  " + user1winMoney);
+        console.log("Q5- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     else if (index === 0 || index === 1) {
-        alert("Wrong Answer");
+        user1display.innerHTML = '<span style="color:red"> Wrong Answer </span>' + `click Next to continue`;
         user1Score += 0; user1winMoney += 0;
 
         //add Q&A to Q&A panel at the bottom
@@ -422,7 +474,7 @@ let showAnswerFive = () => {
         preQue.appendChild(questionP);
         answerP.innerHTML += answersArray[4];
         preAns.appendChild(answerP);
-        // console.log(" user1 score is  " + user1Score); console.log(" user1 score is  " + user1winMoney);
+        console.log("Q5 user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     } else {
         return false;
     }
@@ -436,7 +488,10 @@ let showAnswerSix = () => {
     console.log("Index is " + index);
 
     if (index === 0) {
-        alert(`You got it - ${answersArray[5]} is correct answer`);
+        //user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[5])} is correct answer`;
+        user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[5])} is correct answer.
+        click Next to continue`;
+
         user1Score += 1; user1winMoney += 10;
         p_user1.innerHTML = `Score - ${user1Score}/10`;
         imageDiv.removeEventListener("click", showAnswerSix);
@@ -445,10 +500,10 @@ let showAnswerSix = () => {
         preQue.appendChild(questionP);
         answerP.innerHTML += answersArray[5];
         preAns.appendChild(answerP);
-        // console.log(" user1 score is  " + user1Score); console.log(" user1 winning amount is  " + user1winMoney);
+        console.log("Q6 user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     else if (index === 1 || index === 2) {
-        alert("Wrong Answer");
+        user1display.innerHTML = '<span style="color:red"> Wrong Answer </span>' + `click Next to continue`;
         user1Score += 0; user1winMoney += 0;
 
         //add Q&A to Q&A panel at the bottom
@@ -457,7 +512,7 @@ let showAnswerSix = () => {
         preQue.appendChild(questionP);
         answerP.innerHTML += answersArray[5];
         preAns.appendChild(answerP);
-        // console.log(" user1 score is  " + user1Score); console.log(" user1 score is  " + user1winMoney);
+        console.log("Q6 user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     } else {
         return false;
     }
@@ -471,7 +526,10 @@ let showAnswerSeven = () => {
     console.log("Index is " + index);
 
     if (index === 1) {
-        alert(`You got it - ${answersArray[6]} is correct answer`);
+        //user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[6])} is correct answer`;
+        user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[6])} is correct answer.
+        click Next to continue`;
+
         user1Score += 1; user1winMoney += 10;
         p_user1.innerHTML = `Score - ${user1Score}/10`;
         imageDiv.removeEventListener("click", showAnswerSeven);
@@ -481,10 +539,10 @@ let showAnswerSeven = () => {
         preQue.appendChild(questionP);
         answerP.innerHTML += answersArray[6];
         preAns.appendChild(answerP);
-        // console.log(" user1 score is  " + user1Score); console.log(" user1 winning amount is  " + user1winMoney);
+        console.log("Q7- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     else if (index === 0 || index === 2) {
-        alert("Wrong Answer");
+        user1display.innerHTML = '<span style="color:red"> Wrong Answer </span>' + `click Next to continue`;
         user1Score += 0; user1winMoney += 0;
 
         //add Q&A to Q&A panel at the bottom
@@ -493,7 +551,7 @@ let showAnswerSeven = () => {
         preQue.appendChild(questionP);
         answerP.innerHTML += answersArray[6];
         preAns.appendChild(answerP);
-        // console.log(" user1 score is  " + user1Score); console.log(" user1 score is  " + user1winMoney);
+        console.log("Q7- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     } else {
         return false;
     }
@@ -507,7 +565,8 @@ let showAnswerEight = () => {
     console.log("Index is " + index);
 
     if (index === 2) {
-        alert(`You got it - ${answersArray[7]} is correct answer`);
+        user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[7])} is correct answer.
+        click Next to continue`;
         user1Score += 1; user1winMoney += 10;
         p_user1.innerHTML = `Score - ${user1Score}/10`;
         imageDiv.removeEventListener("click", showAnswerEight);
@@ -517,10 +576,10 @@ let showAnswerEight = () => {
         preQue.appendChild(questionP);
         answerP.innerHTML += answersArray[7];
         preAns.appendChild(answerP);
-        // console.log(" user1 score is  " + user1Score); console.log(" user1 winning amount is  " + user1winMoney);
+        console.log("Q8- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     else if (index === 0 || index === 1) {
-        alert("Wrong Answer");
+        user1display.innerHTML = '<span style="color:red"> Wrong Answer </span>' + `click Next to continue`;
         user1Score += 0; user1winMoney += 0;
 
         //add Q&A to Q&A panel at the bottom
@@ -529,6 +588,9 @@ let showAnswerEight = () => {
         preQue.appendChild(questionP);
         answerP.innerHTML += answersArray[7];
         preAns.appendChild(answerP);
+
+        console.log("Q8- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
+
     } else {
         return false;
     }
@@ -542,7 +604,9 @@ let showAnswerNine = () => {
     console.log("Index is " + index);
 
     if (index === 1) {
-        alert(`You got it - ${answersArray[8]} is correct answer`);
+        // user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[8])} is correct answer`;
+        user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[8])} is correct answer.
+        click Next to continue`;
         user1Score += 1; user1winMoney += 10;
         p_user1.innerHTML = `Score - ${user1Score}/10`;
         imageDiv.removeEventListener("click", showAnswerNine);
@@ -552,9 +616,10 @@ let showAnswerNine = () => {
         preQue.appendChild(questionP);
         answerP.innerHTML += answersArray[8];
         preAns.appendChild(answerP);
+        console.log("Q9- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     else if (index === 0 || index === 2) {
-        alert("Wrong Answer");
+        user1display.innerHTML = '<span style="color:red"> Wrong Answer </span>' + `click Next to continue`;
         user1Score += 0; user1winMoney += 0;
 
         //add Q&A to Q&A panel at the bottom
@@ -563,6 +628,7 @@ let showAnswerNine = () => {
         preQue.appendChild(questionP);
         answerP.innerHTML += answersArray[8];
         preAns.appendChild(answerP);
+        console.log("Q9- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     } else {
         return false;
     }
@@ -575,8 +641,12 @@ let showAnswerTen = () => {
     findImgClicked();
     console.log("Index is " + index);
 
+    //if any of the image clicked in Q10, button value is show Result
+    playBtn.value = "Show Results";
+
     if (index === 0) {
-        alert(`You got it - ${answersArray[9]} is correct answer`);
+        //user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[9])} is correct answer`;
+        user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[9])} is correct answer.`;
         user1Score += 1; user1winMoney += 10;
         p_user1.innerHTML = `Score - ${user1Score}/10`;
         imageDiv.removeEventListener("click", showAnswerTen);
@@ -586,9 +656,10 @@ let showAnswerTen = () => {
         preQue.appendChild(questionP);
         answerP.innerHTML += answersArray[9];
         preAns.appendChild(answerP);
+        console.log("Q10- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     else if (index === 1 || index === 2 || index === 3) {
-        alert("Wrong Answer");
+        user1display.innerHTML = '<span style="color:red"> Wrong Answer </span>';
         user1Score += 0; user1winMoney += 0;
 
         //add Q&A to Q&A panel at the bottom
@@ -597,6 +668,7 @@ let showAnswerTen = () => {
         preQue.appendChild(questionP);
         answerP.innerHTML += answersArray[9];
         preAns.appendChild(answerP);
+        console.log("Q10- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     } else {
         return false;
     }
@@ -604,26 +676,7 @@ let showAnswerTen = () => {
 
 
 let reset = () => {
-    console.log("inside reset method");
     location.reload();
-
-};
-
-//Timer
-let interval = setInterval(() => {
-    triviaTimer();
-}, 1000); //1000 ms = 1 sec interval
-
-
-let counter = 60; //60secs = 1min
-let triviaTimer = () => {
-    document.querySelector("#timer").value = counter--; //counter++; 
-    if (counter === 0) {
-        console.log("TIME UP");
-        alert("1 min is up");
-        document.querySelector("#timer").remove();
-        return false;
-    }
 };
 
 /* Win Logic
@@ -633,27 +686,28 @@ let triviaTimer = () => {
 
 let winLogic = () => {
     console.log("inside WIN LOGIC method");
+    let winner = "false";
+
     if (user1Score === 10) {
-        user1display.innerHTML = '<span style="color:blue"> CONGRATULATIONS </span>' + `${(user1Name.value)}!!! You are the winner!! You also won $100 `;
-        alert(`CONGRATULATIONS!!!, 
-        You are the winner!!. your score is ${user1Score}. 
-        You also won $100`);
-        alert("Do you want to play again?.. click `Play New Game' button");
+        winner = true;
+        if (winner) {
+            user1display.innerHTML = '<span style="color:blue"> CONGRATULATIONS, </span>' + `${(user1Name.value)}!  
+            You are the winner!!. You also won $100. <br> Do you want to play again? click 'Play New Game' button`;
+        }
     }
     else if (user1Score >= 3) {
-        user1display.innerHTML = '<span style="color:blue"> CONGRATULATIONS </span>' + `${(user1Name.value)}!!!   
-        You are the winner!!   You also won $ ${user1winMoney} `;
-
-        alert(`To win the game, you need at least 3 correct answers.
-            CONGRATULATIONS!!!, You are the winner!!.your score is ${user1Score}
-            You also won $ ${user1winMoney}`);
-        alert("Do you want to play again?.. click `Play New Game' button");
+        winner = true;
+        if (winner) {
+            user1display.innerHTML = '<span style="color:blue"> CONGRATULATIONS, </span>' + `${(user1Name.value)}!  
+            You are the winner!!. You also won $ ${user1winMoney}. <br> Do you want to play again? click 'Play New Game' button`;
+        }
     } else {
         user1display.innerHTML = '<span style="color:red"> Sorry!! </span>' + `${(user1Name.value)},   
         You lost the game.`;
-        alert(`Sorry, you lost the game. 
-        To win the game, you need at least 3 correct answers.your score is ${user1Score}`);
-        alert("Do you want to play again?.. click `Play New Game' button");
+        if (winner === "false") {
+            user1display.innerHTML = '<span style="color:red"> Sorry!, </span>' + `${(user1Name.value)}!!!
+            You lost the game. To win the game, you need at least 3 correct answers. <br> Do you want to play again? click 'Play New Game' button`;
+        }
     }
 
 };

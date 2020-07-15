@@ -33,6 +33,7 @@ Winning logic:
 Code Logic:
 
 Play button triggers play function
+
 PLAY function(){
 -	Checks if user entered Name, if so, presents Que01 and starts timer; tracks scores
 

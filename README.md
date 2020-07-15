@@ -30,6 +30,20 @@ Winning logic:
 - if you are a winner, then you get $10 gift card
 - Perfect score wins $100
 
+Code Logic:
+Play button triggers play function
+PLAY function(){
+-	Checks if user entered Name, if so, presents Que01 and starts timer; tracks scores
+
+showPanel(){
+-	If Q1 then creates imgages, div -> add Q1 img to Div ->add Div to message panel
+-	CheckImageclick();
+-	Based on what image was clicked, shows messages, updates scores, and win amt
+}
+
+When it reaches the last question, call   winLogic(){}
+
+
 Nice to Haves:
 9.	As a user I would like to see the list of trivia questions and answers after I answer each question
 10.	It would be nice to see the timer for the game., which can alert after time outs, and stop the game

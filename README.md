@@ -1,4 +1,4 @@
-# Trivia
+# Country Trivia
 READ ME
 
 Country Trivia 
@@ -24,6 +24,11 @@ MVP User Stories:
 6.	As a user, when I select the answer, I want to see my score updated
 7.	As a user, when I click on NEXT button, I want to see the next trivia question
 8.	When all questions are answered, I want to see the results of the game with appropriate user messages.
+
+Winning logic:
+- At least 5 correct answers are needed to win the country trivia
+- if you are a winner, then you get $10 gift card
+- Perfect score wins $100
 
 Nice to Haves:
 9.	As a user I would like to see the list of trivia questions and answers after I answer each question

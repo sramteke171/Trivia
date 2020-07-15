@@ -106,19 +106,6 @@ section.User1 p {
    font-style: italic;
 }
 
-section.User2 {
-    grid-column: span 1;
-    /* background-image: url(did_you_know.jpeg); */
-    background-repeat: no-repeat;
-    background-position: 0 65%;
-    background-size: cover;
-    text-align: center;
-}
-
-section.User2 p {
-    font-style: italic;
-}
-
 div.questions {
     grid-column: span 1;
     list-style-type: none;

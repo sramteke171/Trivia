@@ -1,29 +1,23 @@
 //Grab html elements
 const playBtn = document.querySelector("#play-btn");
 const resetBtn = document.querySelector("#reset-btn");
-
 const changeMessage = document.querySelector("#transparentBox p");
 let transparentDiv = document.querySelector(".transparentBox");
-
 const user1Name = document.querySelector("#name-text");
 const user1display = document.querySelector("#user1-name");
 const preQue = document.querySelector(".questions p");
 const preAns = document.querySelector(".questions");
 const p_user1 = document.querySelector("#p_user1");
-const p_user2 = document.querySelector("#p_user2");
 
 //"imageDiv - variable to create new div for image panel that will have multiple images"
-//questionP - to add question to Q&A pnael
-//answerP - to add answer to Q&A pnael
+//"questionP - to add question to Q&A pnael; answerP - to add answer to Q&A pnael"
 let imageDiv = document.createElement("div");
 let questionP = document.createElement("p");
 let answerP = document.createElement("p");
-
 let user1Score = 0;
-let user2Score = 0;
 let user1winMoney = 0;
-let user2winMoney = 0;
 let player = null;
+let winner = "false";
 let index;
 
 let questionsArray = [
@@ -60,13 +54,12 @@ let play = () => {
 
             //Timer starts when PLAY button is clicked
             let interval = setInterval(() => {
-
                 if (playBtn.value === "Next" || playBtn.value === "This is Last Question") {
                     triviaTimer();
                 }
-            }, 1000); //1000 ms = 1 sec interval
+            }, 1000);
 
-            let counter = 60; //60secs = 1min
+            let counter = 60;
             let triviaTimer = () => {
                 if (counter > 0) { document.querySelector("#timer").innerHTML = `Remaining Time = ${counter--} seconds`; }
                 else if (counter === 0) {
@@ -85,56 +78,48 @@ let play = () => {
         changeMessage.innerHTML = questionsArray[1];
         showImagePanel();
         user1display.innerHTML = "";
-        console.log("Q1- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     //Q3-What country is made up of 3,000 islands? "
     else if ((playBtn.value === "Next") && (changeMessage.innerHTML === questionsArray[1])) {
         changeMessage.innerHTML = questionsArray[2];
         showImagePanel();
         user1display.innerHTML = "";
-        console.log("Q2- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     //Q4-What country celebrates its New Year with people dancing underneath a dragon costume?
     else if ((playBtn.value === "Next") && (changeMessage.innerHTML === questionsArray[2])) {
         changeMessage.innerHTML = questionsArray[3];
         showImagePanel();
         user1display.innerHTML = "";
-        console.log("Q2- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     //Q5-What country is less than a hundred miles away from the U.S. state - FLORIDA?
     else if ((playBtn.value === "Next") && (changeMessage.innerHTML === questionsArray[3])) {
         changeMessage.innerHTML = questionsArray[4];
         showImagePanel();
         user1display.innerHTML = "";
-        console.log("Q2- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     //Q6- Luxury vehicles such as Ferrari, Maserati, and Lamborghini are manufactured in what country? (italy)
     else if ((playBtn.value === "Next") && (changeMessage.innerHTML === questionsArray[4])) {
         changeMessage.innerHTML = questionsArray[5];
         showImagePanel();
         user1display.innerHTML = "";
-        console.log("Q2- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     //Q7- Where is `Mount Everest`? (nepal)
     else if ((playBtn.value === "Next") && (changeMessage.innerHTML === questionsArray[5])) {
         changeMessage.innerHTML = questionsArray[6];
         showImagePanel();
         user1display.innerHTML = "";
-        console.log("Q2- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     //Q8- Brendan Eich created the JavaScript programming language, Where is he from? (usa)
     else if ((playBtn.value === "Next") && (changeMessage.innerHTML === questionsArray[6])) {
         changeMessage.innerHTML = questionsArray[7];
         showImagePanel();
         user1display.innerHTML = "";
-        console.log("Q2- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     //Q9-Niagara Falls is located in the United States and what other country?
     else if ((playBtn.value === "Next") && (changeMessage.innerHTML === questionsArray[7])) {
         changeMessage.innerHTML = questionsArray[8];
         showImagePanel();
         user1display.innerHTML = "";
-        console.log("Q2- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     //10-True champagne can only come from grapes grown in the Champagne region of what country?
     else if ((playBtn.value === "Next") && (changeMessage.innerHTML === questionsArray[8])) {
@@ -142,7 +127,6 @@ let play = () => {
         showImagePanel();
         user1display.innerHTML = "";
         playBtn.value = "This is Last Question";
-        console.log("Q2- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     else if ((playBtn.value === "Show Results")) {
         //if user clicks show button before timer expires
@@ -240,32 +224,25 @@ let findImgClicked = () => {
     let transparentImgDiv = document.querySelectorAll(".transparentBox img");
     let tranImgArray = Array.from(transparentImgDiv);
 
-    //Find the index of the image from ImgArray ==> that the user clicks. //event.target return which image was clicked
+    //Find the index of the image from ImgArray ==> that the user clicks
     index = tranImgArray.findIndex(function (image) {
-        console.log("return which image clicked === event.target " + event.target);
         return image === event.target;
     });
 }
 
 //Q1 - Where is Taj Mahal? Click on country flag (india)
 let showAnswerOne = () => {
-    //Find which image was clicked
     findImgClicked();
-    console.log(" in first function");
 
-    console.log("Index is " + index);
     if (index === 0) { //india flag clicked
         user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[index])} is correct answer.
         click Next to continue`;
         user1Score += 1; user1winMoney += 10;
         p_user1.innerHTML = `Score - ${user1Score}/10`;
-        console.log(" Q1- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     else if (index === 1 || index === 2) {
         user1display.innerHTML = '<span style="color:red"> Wrong Answer </span>' + `click Next to continue`;
         user1Score += 0; user1winMoney += 0;
-        console.log(" Q1- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
-
     } else {
         return false;
     }
@@ -277,21 +254,17 @@ let showAnswerOne = () => {
 
 //Q2 - What country is called `Land of Fire and Ice`?
 let showAnswerTwo = () => {
-    //Find which image was clicked
     findImgClicked();
-    console.log("index is " + index);
 
     if (index === 1) {
         user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[index])} is correct answer.
         click Next to continue`;
         user1Score += 1; user1winMoney += 10;
         p_user1.innerHTML = `Score - ${user1Score} /10`;
-        console.log(" Q2 - user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     else if (index === 0 || index === 2) {
         user1display.innerHTML = '<span style="color:red"> Wrong Answer </span>' + `click Next to continue`;
         user1Score += 0; user1winMoney += 0;
-        console.log(" Q2 - user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     } else {
         return false;
     }
@@ -303,22 +276,17 @@ let showAnswerTwo = () => {
 
 //Q3 - What country is made up of 3,000 islands? (Japan)
 let showAnswerThree = () => {
-
-    //Find which image was clicked
     findImgClicked();
-    console.log("Ids is " + index);
 
     if (index === 2) {
         user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[index])} is correct answer.
         click Next to continue`;
         user1Score += 1; user1winMoney += 10;
         p_user1.innerHTML = `Score - ${user1Score}/10`;
-        console.log("Q3- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     else if (index === 0 || index === 1) {
         user1display.innerHTML = '<span style="color:red"> Wrong Answer </span>' + `click Next to continue`;
         user1Score += 0; user1winMoney += 0;
-        console.log("Q3- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     } else {
         return false;
     }
@@ -330,22 +298,17 @@ let showAnswerThree = () => {
 
 //Q4 - What country celebrates its New Year with people dancing underneath a dragon costume (China)
 let showAnswerFour = () => {
-
-    //Find which image was clicked
     findImgClicked();
-    console.log("Ids is " + index);
 
     if (index === 1) {
         user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[3])} is correct answer.
         click Next to continue`;
         user1Score += 1; user1winMoney += 10;
         p_user1.innerHTML = `Score - ${user1Score}/10`;
-        console.log("Q4- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     else if (index === 0 || index === 2) {
         user1display.innerHTML = '<span style="color:red"> Wrong Answer </span>' + `click Next to continue`;
         user1Score += 0; user1winMoney += 0;
-        console.log("Q4 user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     } else {
         return false;
     }
@@ -357,22 +320,17 @@ let showAnswerFour = () => {
 
 //Q5 - What country is less than a hundred miles away from the U.S. state - FLORIDA? (CUBA)
 let showAnswerFive = () => {
-
-    //Find which image was clicked
     findImgClicked();
-    // console.log("Index is " + index);
 
     if (index === 2) {
         user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[4])} is correct answer.
         click Next to continue`;
         user1Score += 1; user1winMoney += 10;
         p_user1.innerHTML = `Score - ${user1Score}/10`;
-        console.log("Q5- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     else if (index === 0 || index === 1) {
         user1display.innerHTML = '<span style="color:red"> Wrong Answer </span>' + `click Next to continue`;
         user1Score += 0; user1winMoney += 0;
-        console.log("Q5 user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     } else {
         return false;
     }
@@ -384,22 +342,17 @@ let showAnswerFive = () => {
 
 //Q6- Luxury vehicles such as Ferrari, Maserati, and Lamborghini are manufactured in what country? (italy)
 let showAnswerSix = () => {
-
-    //Find which image was clicked
     findImgClicked();
-    console.log("Index is " + index);
 
     if (index === 0) {
         user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[5])} is correct answer.
         click Next to continue`;
         user1Score += 1; user1winMoney += 10;
         p_user1.innerHTML = `Score - ${user1Score}/10`;
-        console.log("Q6 user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     else if (index === 1 || index === 2) {
         user1display.innerHTML = '<span style="color:red"> Wrong Answer </span>' + `click Next to continue`;
         user1Score += 0; user1winMoney += 0;
-        console.log("Q6 user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     } else {
         return false;
     }
@@ -411,22 +364,17 @@ let showAnswerSix = () => {
 
 //Q7- Where is `Mount Everest`? (nepal)
 let showAnswerSeven = () => {
-
-    //Find which image was clicked
     findImgClicked();
-    console.log("Index is " + index);
 
     if (index === 1) {
         user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[6])} is correct answer.
         click Next to continue`;
         user1Score += 1; user1winMoney += 10;
         p_user1.innerHTML = `Score - ${user1Score}/10`;
-        console.log("Q7- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     else if (index === 0 || index === 2) {
         user1display.innerHTML = '<span style="color:red"> Wrong Answer </span>' + `click Next to continue`;
         user1Score += 0; user1winMoney += 0;
-        console.log("Q7- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     } else {
         return false;
     }
@@ -438,23 +386,17 @@ let showAnswerSeven = () => {
 
 //Q8- Brendan Eich created the JavaScript programming language, Where is he from? (usa)
 let showAnswerEight = () => {
-
-    //Find which image was clicked
     findImgClicked();
-    console.log("Index is " + index);
 
     if (index === 2) {
         user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[7])} is correct answer.
         click Next to continue`;
         user1Score += 1; user1winMoney += 10;
         p_user1.innerHTML = `Score - ${user1Score}/10`;
-        console.log("Q8- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     else if (index === 0 || index === 1) {
         user1display.innerHTML = '<span style="color:red"> Wrong Answer </span>' + `click Next to continue`;
         user1Score += 0; user1winMoney += 0;
-        console.log("Q8- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
-
     } else {
         return false;
     }
@@ -466,22 +408,17 @@ let showAnswerEight = () => {
 
 //Q9 - Niagara Falls is located in the United States and what other country? (canada)
 let showAnswerNine = () => {
-
-    //Find which image was clicked
     findImgClicked();
-    console.log("Index is " + index);
 
     if (index === 1) {
         user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[8])} is correct answer.
         click Next to continue`;
         user1Score += 1; user1winMoney += 10;
         p_user1.innerHTML = `Score - ${user1Score}/10`;
-        console.log("Q9- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     else if (index === 0 || index === 2) {
         user1display.innerHTML = '<span style="color:red"> Wrong Answer </span>' + `click Next to continue`;
         user1Score += 0; user1winMoney += 0;
-        console.log("Q9- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     } else {
         return false;
     }
@@ -493,24 +430,19 @@ let showAnswerNine = () => {
 
 //Q10- True champagne can only come from grapes grown in the Champagne region of what country? (France)
 let showAnswerTen = () => {
-
-    //Find which image was clicked
     findImgClicked();
-    console.log("Index is " + index);
 
-    //if any of the image clicked in Q10, button value is show Result
+    //if any of the image clicked in last question(Q10), button value is show Result
     playBtn.value = "Show Results";
 
     if (index === 0) {
         user1display.innerHTML = '<span style="color:blue"> You got it </span>' + `${(answersArray[9])} is correct answer.`;
         user1Score += 1; user1winMoney += 10;
         p_user1.innerHTML = `Score - ${user1Score}/10`;
-        console.log("Q10- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     }
     else if (index === 1 || index === 2) {
         user1display.innerHTML = '<span style="color:red"> Wrong Answer </span>';
         user1Score += 0; user1winMoney += 0;
-        console.log("Q10- user1 score is  " + user1Score); console.log(" user1 winMoney is  " + user1winMoney);
     } else {
         return false;
     }
@@ -530,8 +462,6 @@ let reset = () => {
  - if all correct answers then, user gets $100 prize */
 
 let winLogic = () => {
-    console.log("inside WIN LOGIC method");
-    let winner = "false";
 
     if (user1Score === 10) {
         winner = true;
@@ -558,4 +488,3 @@ let winLogic = () => {
 //Event listeners
 playBtn.addEventListener("click", play);
 resetBtn.addEventListener("click", reset);
-

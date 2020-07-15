@@ -1,4 +1,4 @@
-# Trivia
+# Country Trivia
 READ ME
 
 Country Trivia 

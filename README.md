@@ -7,15 +7,15 @@ Pseudo code & Draft UI:-
  - think of a HTML UI layout
  - Create html index, .js file, .css file
  - link files
- - Design Questions and Answers
+ - Design Trivia Questions and Answers, images 
  - Design UI in html
- - Style
+ - Style UI
  - Grab HTML elements
- - Ebvent handler and onClick function
+ - Event handler and onClick function (PLAY and RESET buttons)
  - Scoring and winning logic
  - User messages on screen
 
-
+* wasn't able to paste the draft UI image
 
 Technologies used includes:
 -	HTML

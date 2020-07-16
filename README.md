@@ -15,7 +15,11 @@ Pseudo code & Draft UI:-
  - Scoring and winning logic
  - User messages on screen
 
+<<<<<<< HEAD
 * wasn't able to paste the draft UI image
+=======
+** UI image copy didnt work
+>>>>>>> 2bd30726fbfeaf1ee6a84a9315d3aa72a2485844
 
 Technologies used includes:
 -	HTML

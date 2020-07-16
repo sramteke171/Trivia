@@ -4,7 +4,18 @@ READ ME
 Country Trivia 
 
 Pseudo code & Draft UI:-
- 
+ - think of a HTML UI layout
+ - Create html index, .js file, .css file
+ - link files
+ - Design Questions and Answers
+ - Design UI in html
+ - Style
+ - Grab HTML elements
+ - Ebvent handler and onClick function
+ - Scoring and winning logic
+ - User messages on screen
+
+
 
 Technologies used includes:
 -	HTML

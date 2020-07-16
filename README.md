@@ -15,7 +15,7 @@ Pseudo code & Draft UI:-
  - Scoring and winning logic
  - User messages on screen
 
-
+** UI image copy didnt work
 
 Technologies used includes:
 -	HTML
